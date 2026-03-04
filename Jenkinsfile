@@ -1,17 +1,25 @@
-node {
+pipeline {
+    agent any
 
-    stage('Checkout') {
-        echo 'Checking out code from GitHub'
+    stages {
+
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'javac HelloWorld.java'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                bat 'java HelloWorld'
+            }
+        }
+
     }
-
-    stage('Build') {
-        echo 'Compiling Java Program'
-        bat 'javac HelloWorld.java'
-    }
-
-    stage('Run') {
-        echo 'Running Java Program'
-        bat 'java HelloWorld'
-    }
-
 }
